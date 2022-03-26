@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "220481443947",
+    "project_id": "pswfgenerator",
+    "storage_bucket": "pswfgenerator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220481443947:android:b78ec74ef5fb586728f92e",
+        "android_client_info": {
+          "package_name": "com.example.password_generator_paper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220481443947-19l1evfgmllb4fhrbf7og9shoker2nsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArUGcWJG4QsNeKt4oCPW2C1jR1X0cg74k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220481443947-19l1evfgmllb4fhrbf7og9shoker2nsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
