@@ -18,10 +18,11 @@ class _RegisterState extends State<RegisterPage> {
   bool visible = false;
   final _formkey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
+
   // CollectionReference ref = FirebaseFirestore.instance.collection('users');
   final TextEditingController passwordController = new TextEditingController();
   final TextEditingController confirmpassController =
-  new TextEditingController();
+      new TextEditingController();
   final TextEditingController name = new TextEditingController();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController mobile = new TextEditingController();
@@ -89,7 +90,7 @@ class _RegisterState extends State<RegisterPage> {
                               return "Email cannot be empty";
                             }
                             if (!RegExp(
-                                "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                                 .hasMatch(value)) {
                               return ("Please enter a valid email");
                             } else {
@@ -194,7 +195,7 @@ class _RegisterState extends State<RegisterPage> {
                             MaterialButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
+                                      BorderRadius.all(Radius.circular(20.0))),
                               elevation: 5.0,
                               height: 40,
                               onPressed: () {
@@ -217,7 +218,7 @@ class _RegisterState extends State<RegisterPage> {
                             MaterialButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
+                                      BorderRadius.all(Radius.circular(20.0))),
                               elevation: 5.0,
                               height: 40,
                               onPressed: () {
@@ -264,17 +265,17 @@ class _RegisterState extends State<RegisterPage> {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        )
+              email: email,
+              password: password,
+            )
             .whenComplete(() => {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (_) => LoginPage(),
-            ),
-          )
-        });
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => LoginPage(),
+                    ),
+                  )
+                });
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');

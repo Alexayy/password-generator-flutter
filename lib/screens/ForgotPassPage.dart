@@ -187,14 +187,6 @@ class _ForgotpassState extends State<Forgotpass> {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        "WEBFUN",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.yellowAccent[400],
-                        ),
-                      ),
                     ],
                   ),
                 ),

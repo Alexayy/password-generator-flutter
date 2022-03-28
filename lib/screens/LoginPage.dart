@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = new TextEditingController();
 
   final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                               return "Email cannot be empty";
                             }
                             if (!RegExp(
-                                "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                                 .hasMatch(value)) {
                               return ("Please enter a valid email");
                             } else {
@@ -136,8 +137,8 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.blue[900],
                           textColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                            // side: BorderSide(color: Colors.black, width: 1),
-                          ),
+                              // side: BorderSide(color: Colors.black, width: 1),
+                              ),
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
@@ -158,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                         MaterialButton(
                           shape: RoundedRectangleBorder(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
+                                  BorderRadius.all(Radius.circular(20.0))),
                           elevation: 5.0,
                           height: 40,
                           onPressed: () {
@@ -186,8 +187,8 @@ class _LoginPageState extends State<LoginPage> {
                             visible: visible,
                             child: Container(
                                 child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                ))),
+                              color: Colors.white,
+                            ))),
                       ],
                     ),
                   ),
@@ -257,7 +258,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_formkey.currentState!.validate()) {
       try {
         UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
         );
