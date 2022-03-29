@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:password_generator_paper/screens/EditPasswordPage.dart';
 
 final List<dynamic> appName = <String>[];
 final List<dynamic> password = <String>[];
@@ -28,22 +29,37 @@ class _PasswordManagerState extends State<PasswordManager> {
 
   Future<void> _read() async {
     final User? user = auth.currentUser;
-
     CollectionReference collectionReference =
         firestore.collection("${user?.email}");
-
     QuerySnapshot querySnapshot = await collectionReference.get();
-
     querySnapshot.docs.map((e) => entries.add(e.data()));
-
     final allData = querySnapshot.docs.map((e) => e.data()).toList();
-
     smg = allData;
-
     print(allData.length);
     print(smg.length);
+  }
 
-    // return allData;
+  void _delete(String appName) async {
+    final User? user = auth.currentUser;
+    try {
+      firestore.collection("${user?.email}").doc(appName).delete();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _openScreen(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return EditPasswordPage();
+    }));
+
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => EditPasswordPage(),
+    //   ),
+    // );
+    // print('Clicked ' + new EditPasswordPage().password);
   }
 
   @override
@@ -60,7 +76,7 @@ class _PasswordManagerState extends State<PasswordManager> {
           Padding(
             padding: EdgeInsets.only(right: 20),
             child: GestureDetector(
-              onTap: _read,
+              // onTap: _read,
               child: Icon(
                 Icons.access_alarm,
                 size: 26.0,
@@ -85,6 +101,19 @@ class _PasswordManagerState extends State<PasswordManager> {
                         title: Text(doc['appName'] ?? ''),
                         subtitle: Text(doc['generatedPass'] ?? ''),
                         leading: Icon(Icons.copy),
+                        trailing: PopupMenuButton(
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                child: Text('Delete Password'),
+                                value: 'delete',
+                                onTap: () {
+                                  _delete(doc['appName']);
+                                },
+                              ),
+                            ];
+                          },
+                        ),
                         onLongPress: () {
                           Clipboard.setData(
                               ClipboardData(text: doc['generatedPass']));

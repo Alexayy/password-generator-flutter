@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:password_generator_paper/screens/EditPasswordPage.dart';
 
 import 'PasswordManager.dart';
 
@@ -68,30 +69,30 @@ class PassGeneratorPage extends StatelessWidget {
     }
   }
 
-  void _read() async {
-    DocumentSnapshot documentSnapshot;
-    final User? user = auth.currentUser;
-    try {
-      documentSnapshot =
-          await firestore.collection("userData").doc(user?.email).get();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  // void _update() async {
+  // void _read() async {
+  //   DocumentSnapshot documentSnapshot;
   //   final User? user = auth.currentUser;
-  //   final userUID = user?.uid;
   //   try {
-  //     firestore.collection("userData").doc(user?.email).update({
-  //       'userId': userUID,
-  //       'appName': appForPassword.text,
-  //       'generatedPass': password,
-  //     });
+  //     documentSnapshot =
+  //         await firestore.collection("userData").doc(user?.email).get();
   //   } catch (e) {
   //     print(e);
   //   }
   // }
+
+  void _update() async {
+    final User? user = auth.currentUser;
+    final userUID = user?.uid;
+    try {
+      firestore.collection("userData").doc(user?.email).update({
+        'userId': userUID,
+        'appName': appForPassword.text,
+        'generatedPass': password,
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void _delete() async {
     final User? user = auth.currentUser;
@@ -100,6 +101,16 @@ class PassGeneratorPage extends StatelessWidget {
     } catch (e) {
       print(e);
     }
+  }
+
+  void _openScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditPasswordPage(),
+      ),
+    );
+    print('Clicked ' + new EditPasswordPage().password);
   }
 
   @override
@@ -121,7 +132,7 @@ class PassGeneratorPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Random Pass Generator',
+              'Insert the name of the app and press "Generate Pass"!!!',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
@@ -196,10 +207,9 @@ class PassGeneratorPage extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('Item 2'),
+              title: const Text('Edit'),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                CircularProgressIndicator();
               },
             ),
           ],

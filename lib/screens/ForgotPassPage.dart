@@ -177,13 +177,6 @@ class _ForgotpassState extends State<Forgotpass> {
                       SizedBox(
                         height: 40,
                       ),
-                      Text(
-                        "Made by",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
                       SizedBox(
                         height: 5,
                       ),

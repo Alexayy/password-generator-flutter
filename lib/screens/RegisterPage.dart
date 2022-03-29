@@ -213,7 +213,7 @@ class _RegisterState extends State<RegisterPage> {
                                   fontSize: 20,
                                 ),
                               ),
-                              color: Colors.white,
+                              color: Colors.orangeAccent,
                             ),
                             MaterialButton(
                               shape: RoundedRectangleBorder(
@@ -236,17 +236,9 @@ class _RegisterState extends State<RegisterPage> {
                                   fontSize: 20,
                                 ),
                               ),
-                              color: Colors.white,
+                              color: Colors.orangeAccent,
                             ),
                           ],
-                        ),
-                        Text(
-                          "ALEKSA",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: Colors.yellowAccent[400],
-                          ),
                         ),
                       ],
                     ),

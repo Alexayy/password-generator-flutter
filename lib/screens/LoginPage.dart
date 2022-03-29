@@ -134,18 +134,18 @@ class _LoginPageState extends State<LoginPage> {
                           keyboardType: TextInputType.emailAddress,
                         ),
                         RaisedButton(
-                          color: Colors.blue[900],
+                          color: Colors.orangeAccent,
                           textColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                              // side: BorderSide(color: Colors.black, width: 1),
-                              ),
+                              side: BorderSide(color: Colors.black, width: 1),
+                          ),
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (context) => Forgotpass()));
                           },
                           child: Text(
-                            "Forgot Password ....",
+                            "Forgot Password ...",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontSize: 20,
                             ),
                           ),
-                          color: Colors.white,
+                          color: Colors.orangeAccent,
                         ),
                         SizedBox(
                           height: 10,
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                             visible: visible,
                             child: Container(
                                 child: CircularProgressIndicator(
-                              color: Colors.white,
+                              color: Colors.orangeAccent,
                             ))),
                       ],
                     ),
@@ -196,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Container(
-              color: Colors.white,
+              color: Colors.orangeAccent,
               width: MediaQuery.of(context).size.width,
               child: Center(
                 child: Column(
@@ -233,13 +233,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(
                       height: 15,
-                    ),
-                    Text(
-                      "Made by",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                      ),
                     ),
                     SizedBox(
                       height: 5,
