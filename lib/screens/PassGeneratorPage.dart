@@ -16,7 +16,7 @@ class PassGeneratorPage extends StatelessWidget {
 
   Widget _buildButton() {
     final backgroundColor = MaterialStateColor.resolveWith((states) =>
-        states.contains(MaterialState.pressed) ? Colors.pink : Colors.black);
+        states.contains(MaterialState.pressed) ? Colors.orangeAccent : Colors.blueAccent);
 
     return ElevatedButton(
       style: ButtonStyle(backgroundColor: backgroundColor),
@@ -69,61 +69,19 @@ class PassGeneratorPage extends StatelessWidget {
     }
   }
 
-  // void _read() async {
-  //   DocumentSnapshot documentSnapshot;
-  //   final User? user = auth.currentUser;
-  //   try {
-  //     documentSnapshot =
-  //         await firestore.collection("userData").doc(user?.email).get();
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  void _update() async {
-    final User? user = auth.currentUser;
-    final userUID = user?.uid;
-    try {
-      firestore.collection("userData").doc(user?.email).update({
-        'userId': userUID,
-        'appName': appForPassword.text,
-        'generatedPass': password,
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void _delete() async {
-    final User? user = auth.currentUser;
-    try {
-      firestore.collection("userData").doc(user?.email).delete();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void _openScreen(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => EditPasswordPage(),
-      ),
-    );
-    print('Clicked ' + new EditPasswordPage().password);
-  }
-
   @override
   Widget build(BuildContext context) {
     final backgroundColor = MaterialStateColor.resolveWith((states) =>
-        states.contains(MaterialState.pressed) ? Colors.pink : Colors.black);
+        states.contains(MaterialState.pressed) ? Colors.orangeAccent : Colors.blueAccent);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Generate Password',
+          style: TextStyle(color: Colors.orangeAccent),
         ),
         titleTextStyle: Theme.of(context).appBarTheme.titleTextStyle,
+        backgroundColor: Colors.blueAccent,
       ),
       body: Container(
         padding: EdgeInsets.all(32),
@@ -164,7 +122,7 @@ class PassGeneratorPage extends StatelessWidget {
                           'Password Copied',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        backgroundColor: Colors.pink,
+                        backgroundColor: Colors.orangeAccent,
                       );
 
                       ScaffoldMessenger.of(context)
