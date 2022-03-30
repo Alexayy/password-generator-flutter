@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,14 +34,19 @@ class _RegisterState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[900],
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-              color: Colors.blue[900],
+              // color: Colors.blue[900],
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bg4.jpg"),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
               child: SingleChildScrollView(
                 child: Container(
                   margin: EdgeInsets.all(12),
@@ -50,6 +56,13 @@ class _RegisterState extends State<RegisterPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        BackdropFilter(
+                          filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: Container(
+                            decoration:
+                            new BoxDecoration(color: Colors.white.withOpacity(0.0)),
+                          ),
+                        ),
                         SizedBox(
                           height: 80,
                         ),
@@ -191,7 +204,8 @@ class _RegisterState extends State<RegisterPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
+                          children: <Widget>[
+
                             MaterialButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius:
@@ -213,7 +227,7 @@ class _RegisterState extends State<RegisterPage> {
                                   fontSize: 20,
                                 ),
                               ),
-                              color: Colors.orangeAccent,
+                              color: Colors.pinkAccent,
                             ),
                             MaterialButton(
                               shape: RoundedRectangleBorder(
@@ -236,7 +250,7 @@ class _RegisterState extends State<RegisterPage> {
                                   fontSize: 20,
                                 ),
                               ),
-                              color: Colors.orangeAccent,
+                              color: Colors.pinkAccent,
                             ),
                           ],
                         ),

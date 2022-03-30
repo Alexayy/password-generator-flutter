@@ -18,16 +18,20 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Password Generator and Manager',
       theme: ThemeData(
         primaryColor: Colors.pink[900],
           appBarTheme: const AppBarTheme(
               backgroundColor: Colors.pink,
               iconTheme: IconThemeData(color: Colors.red),
               // This will be applied to the action icon buttons that locates on the right side
-              actionsIconTheme: IconThemeData(color: Colors.amber),
-              centerTitle: false,
+              actionsIconTheme: IconThemeData(color: Colors.deepPurpleAccent),
+              centerTitle: true,
               elevation: 15,
-              titleTextStyle: TextStyle(color: Colors.lightBlueAccent))
+              titleTextStyle: TextStyle(color: Colors.purpleAccent)
+          ),
+        cursorColor: Colors.redAccent,
+        textSelectionColor: Colors.deepPurpleAccent,
       ),
       home: LoginPage(),
     );

@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.password_generator_paper">
    <application
-        android:label="Carobna Grobnica Jebenih Pasvorda"
+        android:label="Carobna Grobnica Pasvorda"
         android:name="${applicationName}"
-        android:icon="@mipmap/maca72">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

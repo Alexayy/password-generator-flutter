@@ -1,8 +1,12 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:password_generator_paper/screens/PassGeneratorPage.dart';
+import 'package:password_generator_paper/screens/PasswordManager.dart';
 
 class EditPasswordPage extends StatelessWidget {
   final controller = TextEditingController();
@@ -13,7 +17,11 @@ class EditPasswordPage extends StatelessWidget {
 
   Widget _buildButton(BuildContext context, String newAppName) {
     final backgroundColor = MaterialStateColor.resolveWith((states) =>
-        states.contains(MaterialState.pressed) ? Colors.pink : Colors.black);
+        states.contains(MaterialState.pressed) ? Colors.black : Colors.pinkAccent);
+
+    PasswordManager _appNameToBeChanged = new PasswordManager();
+
+    appForPassword.text = _appNameToBeChanged.getAppName();
 
     return ElevatedButton(
       style: ButtonStyle(backgroundColor: backgroundColor),
@@ -24,6 +32,21 @@ class EditPasswordPage extends StatelessWidget {
         _update(appForPassword.text, newAppForPassword.text);
       },
       child: Text("Change details"),
+    );
+  }
+
+  Widget _buildGenerateButton(BuildContext context) {
+    final backgroundColor = MaterialStateColor.resolveWith((states) =>
+    states.contains(MaterialState.pressed) ? Colors.black : Colors.pinkAccent);
+    final PassGeneratorPage generate = new PassGeneratorPage();
+
+    return ElevatedButton(
+      style: ButtonStyle(backgroundColor: backgroundColor),
+      onPressed: () {
+        password = generate.generatePassword();
+        controller.text = password;
+      },
+      child: Text("Generate Password"),
     );
   }
 
@@ -100,8 +123,6 @@ class EditPasswordPage extends StatelessWidget {
           });
         }
       });
-
-
     } catch (e) {
       print(e);
     }
@@ -110,25 +131,46 @@ class EditPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final backgroundColor = MaterialStateColor.resolveWith((states) =>
-        states.contains(MaterialState.pressed) ? Colors.pink : Colors.black);
-
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.pink),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text(
           'Edit Password',
+          style: TextStyle(color: Colors.white),
         ),
         titleTextStyle: Theme.of(context).appBarTheme.titleTextStyle,
+        backgroundColor: Colors.transparent,
       ),
       body: Container(
         padding: EdgeInsets.all(32),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg6.jpg"),
+            fit: BoxFit.fitHeight,
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const AnimatedOpacity(
+                opacity: 0.5, duration: Duration(milliseconds: 1000)),
+            BackdropFilter(
+              filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+              child: Container(
+                decoration:
+                new BoxDecoration(color: Colors.white.withOpacity(0.0)),
+              ),
+            ),
             Text(
               'Change the password or app name here!',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12,),
 
@@ -139,6 +181,8 @@ class EditPasswordPage extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'App name',
+                fillColor: Colors.white60,
+                filled: true,
               ),
             ), // APP TEXT FIELD
             const SizedBox(height: 12),
@@ -150,6 +194,8 @@ class EditPasswordPage extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'New App name',
+                fillColor: Colors.white60,
+                filled: true,
               ),
             ),
             const SizedBox(height: 12),
@@ -157,6 +203,8 @@ class EditPasswordPage extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
+                  fillColor: Colors.white60,
+                  filled: true,
                   suffixIcon: IconButton(
                     icon: Icon(Icons.copy),
                     onPressed: () {
@@ -178,7 +226,8 @@ class EditPasswordPage extends StatelessWidget {
                   )),
             ), // PASSWORD TEXT FIELD
             const SizedBox(height: 12),
-            _buildButton(context, newAppName)
+            _buildButton(context, newAppName),
+            _buildGenerateButton(context),
           ],
         ),
       ),

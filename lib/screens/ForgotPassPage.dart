@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:password_generator_paper/screens/LoginPage.dart';
@@ -14,7 +16,8 @@ class _ForgotpassState extends State<Forgotpass> {
   bool visible = false;
   final _auth = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
-  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +26,16 @@ class _ForgotpassState extends State<Forgotpass> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            children: <Widget>[
               Container(
-                color: Colors.blue[900],
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: const AssetImage("assets/images/bg5.jpeg"),
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.70,
+                height: MediaQuery.of(context).size.height,
                 child: Center(
                   child: Container(
                     margin: EdgeInsets.all(12),
@@ -37,20 +45,30 @@ class _ForgotpassState extends State<Forgotpass> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          const AnimatedOpacity(
+                              opacity: 0.5,
+                              duration: Duration(milliseconds: 1000)),
+                          BackdropFilter(
+                            filter:
+                                ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.0)),
+                            ),
+                          ),
                           Text(
-                            "Forgot\n"
-                                "Password",
+                            "Forgot password?",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 50,
+                              color: Colors.black,
+                              fontSize: 40,
                             ),
                           ),
                           Text(
                             "Dont worry...",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Colors.black87,
                               fontSize: 20,
                             ),
                           ),
@@ -70,12 +88,12 @@ class _ForgotpassState extends State<Forgotpass> {
                               contentPadding: const EdgeInsets.only(
                                   left: 14.0, bottom: 8.0, top: 8.0),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(20),
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(20),
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                             ),
                             textInputAction: TextInputAction.done,
@@ -84,7 +102,7 @@ class _ForgotpassState extends State<Forgotpass> {
                                 return "Email cannot be empty";
                               }
                               if (!RegExp(
-                                  "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                      "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                                   .hasMatch(value)) {
                                 return ("Please enter a valid email");
                               } else {
@@ -121,7 +139,7 @@ class _ForgotpassState extends State<Forgotpass> {
                                     fontSize: 20,
                                   ),
                                 ),
-                                color: Colors.white,
+                                color: Colors.pink,
                               ),
                               MaterialButton(
                                 shape: RoundedRectangleBorder(
@@ -141,7 +159,7 @@ class _ForgotpassState extends State<Forgotpass> {
                                     fontSize: 20,
                                   ),
                                 ),
-                                color: Colors.white,
+                                color: Colors.pink,
                               ),
                             ],
                           ),
@@ -155,8 +173,8 @@ class _ForgotpassState extends State<Forgotpass> {
                               visible: visible,
                               child: Container(
                                   child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                  ))),
+                                color: Colors.white,
+                              ))),
                         ],
                       ),
                     ),
@@ -196,9 +214,9 @@ class _ForgotpassState extends State<Forgotpass> {
       await _auth
           .sendPasswordResetEmail(email: email)
           .then((uid) => {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => LoginPage()))
-      })
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => LoginPage()))
+              })
           .catchError((e) {});
     }
   }
