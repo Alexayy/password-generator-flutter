@@ -68,6 +68,14 @@ class PassGeneratorPage extends StatelessWidget {
         'appName': appForPassword.text,
         'generatedPass': password,
       });
+
+      print("Successful login? " +
+          "Username: " +
+          userUID.toString() +
+          ", appName: " +
+          appForPassword.text +
+          ", generatedPass: " +
+          password);
     } catch (e) {
       print(e);
     }
