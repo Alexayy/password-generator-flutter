@@ -1,0 +1,148 @@
+@startuml
+set namespaceSeparator ::
+
+class "password_generator_paper::screens::PassGeneratorPage.dart::PassGeneratorPage" {
+  +TextEditingController controller
+  +TextEditingController appForPassword
+  +String password
+  +FirebaseFirestore firestore
+  +FirebaseAuth auth
+  -Widget _buildButton()
+  +String generatePassword()
+  -void _create()
+  +Widget build()
+}
+
+"password_generator_paper::screens::PassGeneratorPage.dart::PassGeneratorPage" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"password_generator_paper::screens::PassGeneratorPage.dart::PassGeneratorPage" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"password_generator_paper::screens::PassGeneratorPage.dart::PassGeneratorPage" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "password_generator_paper::screens::PassGeneratorPage.dart::PassGeneratorPage"
+
+class "password_generator_paper::screens::RegisterPage.dart::RegisterPage" {
+  +_RegisterState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "password_generator_paper::screens::RegisterPage.dart::RegisterPage"
+
+class "password_generator_paper::screens::RegisterPage.dart::_RegisterState" {
+  +bool showProgress
+  +bool visible
+  -GlobalKey<FormState> _formkey
+  -FirebaseAuth _auth
+  +TextEditingController passwordController
+  +TextEditingController confirmpassController
+  +TextEditingController name
+  +TextEditingController emailController
+  +TextEditingController mobile
+  -bool _isObscure
+  -bool _isObscure2
+  +File? file
+  +Widget build()
+  +dynamic signUp()
+}
+
+"password_generator_paper::screens::RegisterPage.dart::_RegisterState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"password_generator_paper::screens::RegisterPage.dart::_RegisterState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"password_generator_paper::screens::RegisterPage.dart::_RegisterState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"password_generator_paper::screens::RegisterPage.dart::_RegisterState" o-- "dart::io::File"
+"flutter::src::widgets::framework.dart::State" <|-- "password_generator_paper::screens::RegisterPage.dart::_RegisterState"
+
+class "password_generator_paper::screens::EditPasswordPage.dart::EditPasswordPage" {
+  +TextEditingController controller
+  +TextEditingController appForPassword
+  +TextEditingController newAppForPassword
+  +String newAppName
+  +String password
+  +bool g
+  +FirebaseFirestore firestore
+  +FirebaseAuth auth
+  -Widget _buildButton()
+  -Widget _buildGenerateButton()
+  -Future<bool> _asyncConvert()
+  +dynamic showAlertDialog()
+  -void _update()
+  +Widget build()
+}
+
+"password_generator_paper::screens::EditPasswordPage.dart::EditPasswordPage" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"password_generator_paper::screens::EditPasswordPage.dart::EditPasswordPage" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"password_generator_paper::screens::EditPasswordPage.dart::EditPasswordPage" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "password_generator_paper::screens::EditPasswordPage.dart::EditPasswordPage"
+
+class "password_generator_paper::screens::ForgotPassPage.dart::Forgotpass" {
+  +_ForgotpassState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "password_generator_paper::screens::ForgotPassPage.dart::Forgotpass"
+
+class "password_generator_paper::screens::ForgotPassPage.dart::_ForgotpassState" {
+  +bool visible
+  -FirebaseAuth _auth
+  -GlobalKey<FormState> _formkey
+  +TextEditingController emailController
+  +Widget build()
+  +void Forgotpassss()
+}
+
+"password_generator_paper::screens::ForgotPassPage.dart::_ForgotpassState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"password_generator_paper::screens::ForgotPassPage.dart::_ForgotpassState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"password_generator_paper::screens::ForgotPassPage.dart::_ForgotpassState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "password_generator_paper::screens::ForgotPassPage.dart::_ForgotpassState"
+
+class "password_generator_paper::screens::PasswordManager.dart::PasswordManager" {
+  +_PasswordManagerState createState()
+  +String getAppName()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "password_generator_paper::screens::PasswordManager.dart::PasswordManager"
+
+class "password_generator_paper::screens::PasswordManager.dart::_PasswordManagerState" {
+  +FirebaseFirestore firestore
+  +FirebaseAuth auth
+  +List<dynamic> smg
+  -void _delete()
+  -void _setAppName()
+  +String getAppName()
+  +Widget build()
+}
+
+"password_generator_paper::screens::PasswordManager.dart::_PasswordManagerState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"password_generator_paper::screens::PasswordManager.dart::_PasswordManagerState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"flutter::src::widgets::framework.dart::State" <|-- "password_generator_paper::screens::PasswordManager.dart::_PasswordManagerState"
+
+class "password_generator_paper::screens::LoginPage.dart::LoginPage" {
+  +_LoginPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "password_generator_paper::screens::LoginPage.dart::LoginPage"
+
+class "password_generator_paper::screens::LoginPage.dart::_LoginPageState" {
+  -bool _isObscure3
+  +bool visible
+  -GlobalKey<FormState> _formkey
+  +TextEditingController emailController
+  +TextEditingController passwordController
+  -FirebaseAuth _auth
+  +Widget build()
+  +void signIn()
+}
+
+"password_generator_paper::screens::LoginPage.dart::_LoginPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"password_generator_paper::screens::LoginPage.dart::_LoginPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"password_generator_paper::screens::LoginPage.dart::_LoginPageState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"flutter::src::widgets::framework.dart::State" <|-- "password_generator_paper::screens::LoginPage.dart::_LoginPageState"
+
+class "password_generator_paper::main.dart::MyApp" {
+  +_MyAppState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "password_generator_paper::main.dart::MyApp"
+
+class "password_generator_paper::main.dart::_MyAppState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "password_generator_paper::main.dart::_MyAppState"
+
+
+@enduml
