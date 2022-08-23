@@ -30,9 +30,7 @@ class _MyAppState extends State<MyApp> {
               centerTitle: true,
               elevation: 15,
               titleTextStyle: TextStyle(color: Colors.purpleAccent)
-          ),
-        cursorColor: Colors.redAccent,
-        textSelectionColor: Colors.deepPurpleAccent,
+          ), textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.redAccent, selectionColor: Colors.deepPurpleAccent,),
       ),
       home: LoginPage(),
     );
